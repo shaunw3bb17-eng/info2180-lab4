@@ -63,10 +63,37 @@ $superheroes = [
   ], 
 ];
 
-?>
+$query = isset($_GET['query']) && is_string($_GET['query']) ? trim($_GET['query']): '';
 
-<ul>
-<?php foreach ($superheroes as $superhero): ?>
-  <li><?= $superhero['alias']; ?></li>
-<?php endforeach; ?>
-</ul>
+if ($query == ''){
+    ?>
+    <ul>
+        <?php foreach ($superheroes as $superhero): ?>
+            <li><?= htmlspecialchars($superhero['alias']); ?></li>
+        <?php endforeach; ?>
+    </ul>
+
+    <?php
+} else {
+    $found = false;
+
+    foreach($superheroes as $superhero){
+        if(
+            stripos($superhero['name'], $query) !== false ||
+            stripos($superhero['alias'], $query) !== false
+        ){
+            $found = true;
+            ?>
+            <h2><?= htmlspecialchars($superhero['alias']); ?></h2>
+            <h3><?= htmlspecialchars($superhero['name']); ?></h3>
+            <p><?= htmlspecialchars($superhero['biography']); ?></p>
+            <?php
+            break;
+        }
+    }
+    if(!$found){
+        echo "Superhero not found";
+    }
+}
+
+?>

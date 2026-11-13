@@ -84,8 +84,8 @@ if ($query == ''){
         ){
             $found = true;
             ?>
-            <h2><?= htmlspecialchars($superhero['alias']); ?></h2>
-            <h3><?= htmlspecialchars($superhero['name']); ?></h3>
+            <h3><?= htmlspecialchars($superhero['alias']); ?></h3>
+            <h4><?= htmlspecialchars($superhero['name']); ?></h4>
             <p><?= htmlspecialchars($superhero['biography']); ?></p>
             <?php
             break;
